@@ -13,13 +13,18 @@ export default function Form({ validationSchema, initialValues, onSubmit, childr
     }}
   >
     {({ isSubmitting, errors }) => (
-      <FormikForm>
+      <>
+        {
+          isSubmitting && <div className='text-lg text-gray-400  '> Submitting.... </div>
+        }
+        <FormikForm>
 
-        <div className='my-3 text-sm'>
-          {errors && Object.keys(errors).map((index) => <div className='text-red-500' key={index}>{errors[index]?.toString() || ""}</div>)}
-        </div>
-        {children}
-      </FormikForm>
+          <div className='my-3 text-sm'>
+            {errors && Object.keys(errors).map((index) => <div className='text-red-500' key={index}>{errors[index]?.toString() || ""}</div>)}
+          </div>
+          {children}
+        </FormikForm>
+      </>
     )}
   </Formik>)
 }

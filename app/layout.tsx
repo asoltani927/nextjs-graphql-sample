@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
+import StoreProvider from "@/providers/store.provider";
+import ApolloClientProvider from "@/providers/apollo.provider";
 
-const inter = Roboto({ 
+const inter = Roboto({
   weight: '400',
   subsets: ['latin'],
 });
@@ -19,7 +21,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <StoreProvider>
+          <ApolloClientProvider>
+            {children}
+          </ApolloClientProvider>
+        </StoreProvider>
+      </body>
     </html>
   );
 }

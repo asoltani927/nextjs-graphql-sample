@@ -3,9 +3,12 @@ import * as Yup from 'yup';
 
 const useFormHook = () => {
 
-    const [value, setValue] = useState('');
-    const handleClick = (value: string) => {
-        setValue(value)
+    const [value, setValue] = useState({});
+    const [isCompleted, setIsCompleted] = useState(false);
+
+    const handleClick = (values: any) => {
+        setValue(values)
+        setIsCompleted(true)
         //do something.
     };
 
@@ -26,6 +29,7 @@ const useFormHook = () => {
     return {
         value,
         handleClick,
+        isCompleted,
         formValidationSchema
     }
 }
