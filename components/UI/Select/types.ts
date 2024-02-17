@@ -10,7 +10,6 @@ interface SelectPropsBase {
   disabled?: boolean;
   selected?: boolean;
   placeholder?: string;
-  value?: string | ReactNode;
   focused?: boolean;
   accessory?: "disclosure";
   label?: string | ReactNode;

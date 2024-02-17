@@ -13,7 +13,7 @@ interface InputPropsBase {
 
 export interface InputComponentProps
   extends InputPropsBase,
-    DetailedHTMLProps<
+    Omit<DetailedHTMLProps<
       InputHTMLAttributes<HTMLButtonElement>,
       HTMLButtonElement
-    > {}
+    >, 'name'> {}

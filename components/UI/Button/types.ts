@@ -3,15 +3,6 @@ import { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from "react";
 interface ButtonPropsBase {
     disabled?: boolean;
     loading?: boolean;
-    color?:
-    | "primary"
-    | "secondary"
-    | "dark"
-    | "light"
-    | "green"
-    | "red"
-    | "yellow"
-    | "purple";
     outlined?: boolean;
     pills?: boolean;
     preIcon?: ReactNode;
