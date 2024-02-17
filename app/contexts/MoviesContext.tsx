@@ -3,14 +3,14 @@ import { ReactNode, createContext, useEffect, useState } from "react";
 
 type MovieContext = {
   stars: string[];
-  isLoading: boolean;
+  isFetching: boolean;
 };
 
 export const MovieContext = createContext({} as MovieContext);
 
 export default function MoviesContext({ children }: { children: ReactNode }) {
   const [stars, setStars] = useState<string[]>([] as string[]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isFetching, setIsFetching] = useState<boolean>(true);
   const { loading } = useQuery(
     gql`
       query Query {
@@ -40,14 +40,14 @@ export default function MoviesContext({ children }: { children: ReactNode }) {
   );
 
   useEffect(() => {
-    if (loading) setIsLoading(true);
-    else setIsLoading(false);
+    if (loading) setIsFetching(true);
+    else setIsFetching(false);
     return () => {}
   }, [loading])
 
   return (
     <>
-      <MovieContext.Provider value={{ stars, isLoading }}>
+      <MovieContext.Provider value={{ stars, isFetching }}>
         {children}
       </MovieContext.Provider>
     </>

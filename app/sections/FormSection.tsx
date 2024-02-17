@@ -2,22 +2,23 @@
 
 import { Button, Form, Input, Select } from "@/components/UI";
 import useFormHook from "../libs/useFormHook";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { MovieContext } from "../contexts/MoviesContext";
 import Loading from "@/components/UI/Loading";
 
 export default function FormSection() {
+
     const { value, handleClick, formValidationSchema, isCompleted } = useFormHook();
-    const { stars, isLoading } = useContext(MovieContext);
+    const { stars, isFetching } = useContext(MovieContext);
 
     return (<>
         <div className="bg-white shadow-md md:rounded px-8 py-6 h-[100vh] md:h-auto">
 
             {
-                isLoading && <div className="flex justify-center items-center py-20"><Loading /></div>
+                isFetching && <div className="flex justify-center items-center py-20"><Loading /></div>
             }
             {
-                !isLoading && <>
+                !isFetching && <>
 
                     <h1 className="font-bold text-2xl lg:text-4xl">My Form</h1>
                     <Form
@@ -50,7 +51,7 @@ export default function FormSection() {
                                             </Input.Container>
                                             <Select.Container>
                                                 <Select.Input
-                                                    disabled={isLoading}
+                                                    disabled={isFetching}
                                                     label="Favorite Star Wars movie"
                                                     placeholder="Please choose your favorite Star Wars movie"
                                                     name="favoriteMovie"
