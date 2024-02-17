@@ -2,7 +2,9 @@ import { useEffect, useId } from "react";
 import { SelectPropsWeb } from "./types";
 import { Field } from "formik";
 
-export default function SelectInput({ label, placeholder, name, options }: SelectPropsWeb) {
+export default function SelectInput({ label, name, options }: SelectPropsWeb) {
+  // TODO: adding validation errors styles
+
   // generating a unique id for label and input. so when user click in label, the focus will be enabled on input
   const uniqId = useId();
 
@@ -32,9 +34,6 @@ export default function SelectInput({ label, placeholder, name, options }: Selec
         name={name}
         className="block appearance-none shadow border rounded w-full p-2 px-3text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-white"
       >
-        {
-          placeholder && <option selected disabled>{placeholder}</option>
-        }
         {
           options && <OptionsComponent />
         }
