@@ -8,6 +8,7 @@ interface InputPropsBase {
   focused?: boolean;
   accessory?: "disclosure";
   label?: string | ReactNode;
+  name: string
 }
 
 export interface InputComponentProps

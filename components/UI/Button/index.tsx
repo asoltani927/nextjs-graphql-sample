@@ -1,3 +1,3 @@
-import Button from './Button'
+import Base from './BaseButton'
 
-export default Button
+export { Base }
