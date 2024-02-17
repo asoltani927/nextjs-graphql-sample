@@ -1,41 +1,55 @@
 import { gql, useQuery } from "@apollo/client";
-import { ReactNode, createContext, useState } from "react";
+import { ReactNode, createContext, useEffect, useState } from "react";
 
 type MovieContext = {
   stars: string[];
+  isLoading: boolean;
 };
 
 export const MovieContext = createContext({} as MovieContext);
 
-
 export default function MoviesContext({ children }: { children: ReactNode }) {
   const [stars, setStars] = useState<string[]>([] as string[]);
-  useQuery(gql`
-  query Query {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const { loading } = useQuery(
+    gql`
+      query Query {
         allFilms {
-            films {
-              title
-              director
-              releaseDate
-              speciesConnection {
-                species {
+          films {
+            title
+            director
+            releaseDate
+            speciesConnection {
+              species {
+                name
+                classification
+                homeworld {
                   name
-                  classification
-                  homeworld {
-                    name
-                  }
                 }
               }
             }
           }
         }
-      `, {
-    onCompleted: (data) => {
-      setStars(data?.allFilms?.films?.map((item: any) => item.title))
+      }
+    `,
+    {
+      onCompleted: (data) => {
+        setStars(data?.allFilms?.films?.map((item: any) => item.title));
+      },
     }
-  });
+  );
 
-  return <>
-    <MovieContext.Provider value={{ stars }}>{children}</MovieContext.Provider>
-  </>
+  useEffect(() => {
+    if (loading) setIsLoading(true);
+    else setIsLoading(false);
+    return () => {}
+  }, [loading])
+
+  return (
+    <>
+      <MovieContext.Provider value={{ stars, isLoading }}>
+        {children}
+      </MovieContext.Provider>
+    </>
+  );
 }
