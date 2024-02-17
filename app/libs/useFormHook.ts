@@ -14,11 +14,11 @@ const useFormHook = () => {
             firstName: Yup.string()
                 .min(2, 'Too Short!')
                 .max(50, 'Too Long!')
-                .required('Required'),
+                .required('You need to enter a first name'),
             lastName: Yup.string()
                 .min(2, 'Too Short!')
                 .max(50, 'Too Long!')
-                .required('Required'),
+                .required('You need to enter a first name'),
             favoriteMovie: Yup.string().optional(),
         });
     };
